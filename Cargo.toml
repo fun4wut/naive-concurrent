@@ -1,10 +1,11 @@
 [package]
-name = "webserver"
-version = "0.1.0"
 authors = ["fun4wut <nihouze@163.com>"]
 edition = "2018"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+name = "webserver"
+version = "0.1.0"
 
 [dependencies]
-async-std = "0.99"
+async-std = {version = "0.99", features = ["unstable"]}
+futures-timer = "1.0"
+scheduled-thread-pool = "0.2.2"
+crossbeam = "0.7"
