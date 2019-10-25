@@ -1,22 +1,19 @@
-use std::sync::{mpsc, Arc, Mutex};
-use std::thread; // 生产者消费者模型
-                 // 接收者，使用了引用计数和互斥锁来保证多所有者共享和互斥访问
+use super::{Message,Worker};
+use crate::pool_lib::ThreadPool;
+use std::sync::{mpsc, Arc, Mutex}; // 生产者消费者模型
+use std::thread;
+use std::thread::JoinHandle;
+// 接收者，使用了引用计数和互斥锁来保证多所有者共享和互斥访问
 type Receiver = Arc<Mutex<mpsc::Receiver<Message>>>;
-// 要传递的闭包，Send来线程间传递，'static生命周期意味着贯穿整个程序，因为不知道该线程执行多久
-type Job = Box<dyn FnOnce() + Send + 'static>;
-/// 传递的信息，有可能是新的任务，或是终止信息
-enum Message {
-    NewJob(Job),
-    Terminate,
-}
+
 /// 线程池
-pub struct ThreadPool {
+pub struct NaiveThreadPool {
     /// 工作线程
-    workers: Vec<Worker>,
+    workers: Vec<NaiveWorker>,
     /// 信息的发送者
     sender: mpsc::Sender<Message>,
 }
-impl ThreadPool {
+impl NaiveThreadPool {
     pub fn new(size: usize) -> Self {
         assert!(size > 0);
         // 创建通道
@@ -25,22 +22,28 @@ impl ThreadPool {
         let receiver = Arc::new(Mutex::new(receiver));
         Self {
             workers: (0..size)
-                .map(|i| Worker::new(i, Arc::clone(&receiver)))
+                .map(|i| NaiveWorker::new(i, Arc::clone(&receiver)))
                 .collect::<_>(),
             sender, // 发送者
         }
     }
-    pub fn execute<F>(&self, f: F)
+}
+impl ThreadPool for NaiveThreadPool {
+    fn execute<F>(&self, f: F)
     where
         F: FnOnce() + Send + 'static,
     {
-        let message = Message::NewJob(box f);
+        let message = Message::NewJob(Box::new(f));
         self.sender.send(message).unwrap();
+    }
+
+    fn workers(&self) -> Vec<Box<dyn Worker>> {
+        Box::new(self.workers)
     }
 }
 
 /// 停机处理
-impl Drop for ThreadPool {
+impl Drop for NaiveThreadPool {
     fn drop(&mut self) {
         println!("Sending terminate message to all workers.");
         // 先发送停机message
@@ -58,12 +61,21 @@ impl Drop for ThreadPool {
         }
     }
 }
-struct Worker {
+struct NaiveWorker {
     id: usize,
     // 里面的线程是可为空的
     thread: Option<thread::JoinHandle<()>>,
 }
-impl Worker {
+impl Worker for NaiveWorker {
+    fn thread(&self) -> Box<Option<JoinHandle<()>>> {
+        Box::new(self.thread)
+    }
+
+    fn id(&self) -> usize {
+        self.id
+    }
+}
+impl NaiveWorker {
     fn new(id: usize, receiver: Receiver) -> Self {
         Self {
             id,
