@@ -1,3 +1,4 @@
+#![feature(box_syntax)]
 #![allow(clippy::unused_io_amount)]
 mod block;
 mod future;
@@ -24,6 +25,7 @@ fn main() -> std::io::Result<()> {
         "naive" => get_pool_main!(naive),
         "schedule" => get_pool_main!(schedule),
         "mpmc" => get_pool_main!(mpmc),
+        "cvar" => get_pool_main!(cvar),
         _ => panic!("invalid arguments!"),
     }?;
     Ok(())

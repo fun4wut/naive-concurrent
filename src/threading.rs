@@ -1,5 +1,7 @@
 use super::block::handle_connection;
-use crate::pool_lib::{MPMCThreadPool, NaiveThreadPool, ScheduledThreadPool, ThreadPool};
+use crate::pool_lib::{
+    MPMCThreadPool, NaiveThreadPool, ScheduledThreadPool, ThreadPool, CVarThreadPool
+};
 use crate::{ADDR, POOL_SIZE};
 use std::net::TcpListener;
 
@@ -25,6 +27,7 @@ macro_rules! make_convert_fn {
 make_convert_fn! {naive, NaiveThreadPool}
 make_convert_fn! {schedule, ScheduledThreadPool}
 make_convert_fn! {mpmc, MPMCThreadPool}
+make_convert_fn! {cvar, CVarThreadPool}
 #[macro_export]
 macro_rules! get_pool_main {
     ($s:ident) => {

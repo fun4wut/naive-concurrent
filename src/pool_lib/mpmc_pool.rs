@@ -2,11 +2,7 @@ use crate::pool_lib::{Message, ThreadPool};
 use crossbeam::channel;
 use crossbeam::channel::Receiver;
 use std::thread;
-struct Worker {
-    id: usize,
-    // 里面的线程是可为空的
-    thread: Option<thread::JoinHandle<()>>,
-}
+gen_struct! {worker}
 impl Worker {
     fn new(id: usize, receiver: Receiver<Message>) -> Self {
         Self {
@@ -48,19 +44,4 @@ impl MPMCThreadPool {
         }
     }
 }
-
-impl ThreadPool for MPMCThreadPool {
-    fn execute<F>(&self, f: F)
-    where
-        F: FnOnce() + Send + 'static,
-    {
-        let message = Message::NewJob(Box::new(f));
-        self.sender.send(message).unwrap();
-    }
-}
-
-impl Drop for MPMCThreadPool {
-    fn drop(&mut self) {
-        unimplemented!()
-    }
-}
+impl_pool_traits! {MPMCThreadPool}
