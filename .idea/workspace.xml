@@ -11,16 +11,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2bbe83f7-159f-4c3d-9f16-3669afca4103" name="Default Changelist" comment="初次提交">
-      <change afterPath="$PROJECT_DIR$/src/pool_lib/condvar_pool.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pool_lib/utils.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/.editorconfig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rustfmt.toml" beforeDir="false" afterPath="$PROJECT_DIR$/rustfmt.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pool_lib/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/pool_lib/mod.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pool_lib/mpmc_pool.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/pool_lib/mpmc_pool.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pool_lib/naive_pool.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/pool_lib/naive_pool.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/threading.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/threading.rs" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -81,17 +72,6 @@
               <item name="naive-server" type="b2602c69:ProjectViewProjectNode" />
               <item name="naive-server" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="naive-server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="naive-server" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="naive-server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="naive-server" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pool_lib" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -133,12 +113,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1572051050527</updated>
-      <workItem from="1572051052018" duration="18595000" />
+      <workItem from="1572051052018" duration="18993000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18596000" />
+    <option name="totallyTimeSpent" value="18994000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
@@ -176,9 +156,6 @@
           <second_editor />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Cargo.lock">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/Cargo.toml">
       <provider selected="true" editor-type-id="text-editor" />
@@ -256,6 +233,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="6" column="37" selection-start-line="6" selection-start-column="37" selection-end-line="6" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Cargo.lock">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
         </state>
       </provider>
     </entry>
